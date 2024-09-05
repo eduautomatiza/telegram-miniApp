@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram WebApp Init Data</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <h1>Dados do Telegram WebApp</h1>
+    <div id="userData"></div>
+
+    <script>
+        // Função que inicializa o WebApp e captura o initData
+        window.onload = function() {
+            const initData = Telegram.WebApp.initData;
+            const initDataUnsafe = Telegram.WebApp.initDataUnsafe;
+
+            // Mostra os dados do WebApp na interface
+            document.getElementById('userData').innerHTML = `
+                <p><strong>ID do Usuário:</strong> ${initDataUnsafe.user.id}</p>
+                <p><strong>Nome do Usuário:</strong> ${initDataUnsafe.user.first_name} ${initDataUnsafe.user.last_name || ''}</p>
+                <p><strong>Nome de Usuário:</strong> ${initDataUnsafe.user.username || 'N/A'}</p>
+                <p><strong>ID do Chat:</strong> ${initDataUnsafe.chat?.id || 'N/A'}</p>
+                <p><strong>Token:</strong> ${initData}</p>
+            `;
+        }
+    </script>
+</body>
+</html>

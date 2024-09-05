@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecionando...</title>
+    <script type="text/javascript">
+        // Redireciona para miniApp.app
+        window.location.href = "miniApp.app";
+    </script>
+</head>
+<body>
+    <p>Redirecionando para <a href="miniApp.app">miniApp.app</a>...</p>
+</body>
+</html>

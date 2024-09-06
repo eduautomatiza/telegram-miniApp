@@ -8,7 +8,10 @@
 </head>
 <body>
     <h1>Dados do Telegram WebApp</h1>
-    <div id="userData"></div>
+    <!-- <div id="userData"></div> -->
+    <p>initData:</p>
+    <div id="initData_id"></div>
+    <p>initDataUnsafe:</p>
     <div id="initDataUnsafe_id"></div>
 
     <script>
@@ -19,13 +22,13 @@
 
             // Mostra os dados do WebApp na interface
             
-            document.getElementById('userData').innerHTML = `
-                <p><strong>ID do Usuário:</strong> ${initDataUnsafe.user.id}</p>
-                <p><strong>Nome do Usuário:</strong> ${initDataUnsafe.user.first_name} ${initDataUnsafe.user.last_name || ''}</p>
-                <p><strong>Nome de Usuário:</strong> ${initDataUnsafe.user.username || 'N/A'}</p>
-                <p><strong>ID do Chat:</strong> ${initDataUnsafe.chat?.id || 'N/A'}</p>
-                <p><strong>Token:</strong> ${JSON.stringify(initData)}</p>
-            `;
+            // document.getElementById('userData').innerHTML = `
+            //     <p><strong>ID do Usuário:</strong> ${initDataUnsafe.user.id}</p>
+            //     <p><strong>Nome do Usuário:</strong> ${initDataUnsafe.user.first_name} ${initDataUnsafe.user.last_name || ''}</p>
+            //     <p><strong>Nome de Usuário:</strong> ${initDataUnsafe.user.username || 'N/A'}</p>
+            //     <p><strong>ID do Chat:</strong> ${initDataUnsafe.chat?.id || 'N/A'}</p>
+            //     <p><strong>Token:</strong> ${JSON.stringify(initData)}</p>
+            // `;
 
             const userDataDiv = document.getElementById('initDataUnsafe_id');
 
@@ -36,6 +39,43 @@
                 p.textContent = `${key}: ${displayValue}`;
                 userDataDiv.appendChild(p);
             });
+
+            // Função para decodificar e transformar em um objeto
+            function parseInitData(rawData) {
+                // Dividir o initData bruto por '&' para separar cada chave/valor
+                const params = new URLSearchParams(decodeURIComponent(rawData));
+                const parsedData = {};
+
+                // Iterar sobre os parâmetros e processar
+                for (const [key, value] of params.entries()) {
+                    try {
+                        // Se for um objeto JSON (como o 'user'), faz o parse
+                        parsedData[key] = JSON.parse(value);
+                    } catch (e) {
+                        // Para valores simples, apenas atribui
+                        parsedData[key] = value;
+                    }
+                }
+                return parsedData;
+            }
+
+            // Decodifica e faz o parse do initData
+            const initDataParsed = parseInitData(initData);
+
+            // Função para exibir os dados na página
+            function displayInitData(data) {
+                const initDataDiv = document.getElementById('initData_id');
+                for (const [key, value] of Object.entries(data)) {
+                    const p = document.createElement('p');
+                    // Verifica se o valor é um objeto, e o transforma em uma string legível
+                    const displayValue = (typeof value === 'object') ? JSON.stringify(value, null, 2) : value;
+                    p.textContent = `${key}: ${displayValue}`;
+                    initDataDiv.appendChild(p);
+                }
+            }
+
+            // Chama a função para exibir os dados
+            displayInitData(initDataParsed);
 
         }
     </script>

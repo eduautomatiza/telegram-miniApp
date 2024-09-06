@@ -9,6 +9,7 @@
 <body>
     <h1>Dados do Telegram WebApp</h1>
     <div id="userData"></div>
+    <div id="initDataUnsafe_id"></div>
 
     <script>
         // Função que inicializa o WebApp e captura o initData
@@ -26,6 +27,21 @@
                 <p><strong>Param:</strong> ${initDataUnsafe || 'N/A'}</p>
                 <p><strong>Token:</strong> ${initData}</p>
             `;
+
+            const userDataDiv = document.getElementById('initDataUnsafe_id');
+
+            // Percorre as chaves e valores de initDataUnsafe
+            Object.entries(initDataUnsafe).forEach(([key, value]) => {
+                // Cria um novo parágrafo para cada chave/valor
+                const p = document.createElement('p');
+                // Se o valor for um objeto, converte para string JSON
+                const displayValue = (typeof value === 'object') ? JSON.stringify(value) : value;
+                // Define o texto do parágrafo
+                p.textContent = `${key}: ${displayValue}`;
+                // Insere o parágrafo dentro do div
+                userDataDiv.appendChild(p);
+            });
+
         }
     </script>
 </body>

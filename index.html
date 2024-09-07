@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Dados do Telegram WebApp</h1>
-    <!-- <div id="userData"></div> -->
+    <div id="userData"></div>
     <p>initData:</p>
     <div id="initData_id"></div>
     <p>initDataUnsafe:</p>
@@ -22,13 +22,10 @@
 
             // Mostra os dados do WebApp na interface
             
-            // document.getElementById('userData').innerHTML = `
-            //     <p><strong>ID do Usuário:</strong> ${initDataUnsafe.user.id}</p>
-            //     <p><strong>Nome do Usuário:</strong> ${initDataUnsafe.user.first_name} ${initDataUnsafe.user.last_name || ''}</p>
-            //     <p><strong>Nome de Usuário:</strong> ${initDataUnsafe.user.username || 'N/A'}</p>
-            //     <p><strong>ID do Chat:</strong> ${initDataUnsafe.chat?.id || 'N/A'}</p>
-            //     <p><strong>Token:</strong> ${JSON.stringify(initData)}</p>
-            // `;
+            document.getElementById('userData').innerText = `
+                <p><strong>initData:</strong> ${JSON.stringify(initData)}</p>
+                <p><strong>initDataUnsafe:</strong> ${JSON.stringify(initDataUnsafe)}</p>
+            `;
 
             const userDataDiv = document.getElementById('initDataUnsafe_id');
 

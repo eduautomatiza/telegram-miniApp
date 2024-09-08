@@ -34,7 +34,6 @@
             // `;
 
             const urlParams = new URLSearchParams(window.location.search);
-            const receivedData = urlParams.get('startapp') || 'N/A';
 
             document.getElementById('userData').innerHTML = `
                 <p><strong>ID do Usuário:</strong> ${initDataUnsafe.user.id}</p>
@@ -42,7 +41,7 @@
                 <p><strong>Nome de Usuário:</strong> ${initDataUnsafe.user.username || 'N/A'}</p>
                 <p><strong>ID do Chat:</strong> ${initDataUnsafe.chat?.id || 'N/A'}</p>
                 <p><strong>start_param:</strong> ${initDataUnsafe?.start_param ? atob(initDataUnsafe.start_param) : 'N/A'}
-                <p><strong>urlParam:</strong> ${receivedData}</p>
+                <p><strong>urlParam:</strong> ${JSON.stringify(urlParams)}</p>
                 <p><strong>Token:</strong> ${initData}</p>
             `;
 

@@ -34,7 +34,7 @@
             // `;
 
             const urlParams = new URLSearchParams(window.location.search);
-            const receivedData = urlParams.get('data') || 'N/A';
+            const receivedData = urlParams.get('startapp') || 'N/A';
 
             document.getElementById('userData').innerHTML = `
                 <p><strong>ID do Usuário:</strong> ${initDataUnsafe.user.id}</p>
